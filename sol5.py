@@ -1,21 +1,25 @@
-import sys
+import sys, math
 
 def solution(n):
   n = int(n)
-  min = 0
-  max = 1
-
   count = 0
-  
-  while max < n:
-    max, min = max * 2, max
+  if n == 1: return 0
+
+  while n != 1:
+    if math.log(n, 2).is_integer() == True:
+      return int(count + math.log(n, 2))
+    elif n % 2 == 0: 
+      n = n >> 1
+    elif n == 3 or n % 4 == 1:
+      n -= 1
+    else:
+      n += 1
     count += 1
-
-  count += max - n if max - n < n - min - 1 else n - min - 1
-
-  return str(count)
-
+  return count
+      
+    
+  
 print(solution('15'))
 print(solution('4'))
-print(solution('9'  * 310))
-print(solution(sys.argv[1]))
+print(solution('9' * 310))
+
